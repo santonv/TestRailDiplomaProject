@@ -4,6 +4,7 @@ import Base.BasePage;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -49,8 +50,8 @@ public class TestCasesPage extends BasePage {
         builder.moveToElement(element).perform();
         element.click();
         ArrayList<WebElement> deletePermanently = new ArrayList(driver.findElements(By.xpath("//a[contains(text(),'Mark as Deleted')]")));
-        wait.until(ExpectedConditions.visibilityOf(deletePermanently.get(0))).click();
-        // wait.until(ExpectedConditions.visibilityOf(deletePermanently.get(1))).click();
+        JavascriptExecutor executor = (JavascriptExecutor)driver;
+        executor.executeScript("arguments[0].click();", deletePermanently.get(0));
         return this;
     }
 }
