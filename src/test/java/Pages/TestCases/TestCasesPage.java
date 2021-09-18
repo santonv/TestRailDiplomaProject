@@ -49,9 +49,10 @@ public class TestCasesPage extends BasePage {
         Actions builder = new Actions(driver);
         builder.moveToElement(element).perform();
         element.click();
-        ArrayList<WebElement> deletePermanently = new ArrayList(driver.findElements(By.xpath("//a[contains(text(),'Mark as Deleted')]")));
+        // ArrayList<WebElement> deletePermanently = new ArrayList(driver.findElements(By.xpath("//a[contains(text(),'Mark as Deleted')]")));
+        WebElement element1 = driver.findElement(By.xpath("//a[contains(text(),'Mark as Deleted')]"));
         JavascriptExecutor executor = (JavascriptExecutor)driver;
-        executor.executeScript("arguments[0].click();", deletePermanently.get(0));
+        executor.executeScript("arguments[0].click();", element1);
         return this;
     }
 }
