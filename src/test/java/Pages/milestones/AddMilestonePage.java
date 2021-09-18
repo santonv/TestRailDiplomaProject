@@ -41,7 +41,8 @@ public class AddMilestonePage extends BasePage {
         new Input(driver, "Reference").write(milestone.getReferences());
         new Input(driver, "Start_on").write(milestone.getStartDate());
         new Input(driver, "Due_on").write(milestone.getEndDate());
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", checkbox);
+        JavascriptExecutor jse2 = (JavascriptExecutor)driver;
+        jse2.executeScript("arguments[0].scrollIntoView()", checkbox);
         checkbox.click();
         addMilestoneButton.click();
         return new ProjectsPage(driver);
