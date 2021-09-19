@@ -22,7 +22,7 @@ public class TestCasesPage extends BasePage {
     @FindBy(xpath = "//span[contains(text(),'Add Test Case')]")
     private WebElement addTestCaseButton;
 
-    private String deleteIcon = "//span[contains(text(),'%s')]//following::div[@class='icon-small-delete hidden action-hover']";
+    private String deleteIcon = "//span[contains(text(),'%s')]//preceding::input[@type='checkbox'][2]";
 
     public TestCasesPage(WebDriver driver) {
         super(driver);
@@ -45,19 +45,9 @@ public class TestCasesPage extends BasePage {
     @Step("Delete Test Case")
     public TestCasesPage deleteTestCase(String testCaseName){
         log.info("Delete test case {}", testCaseName);
-        WebElement element = driver.findElement(By.xpath(String.format(deleteIcon,testCaseName)));
-        Actions builder = new Actions(driver);
-        builder.moveToElement(element).perform();
-        element.click();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        // ArrayList<WebElement> deletePermanently = new ArrayList(driver.findElements(By.xpath("//a[contains(text(),'Mark as Deleted')]")));
-        WebElement element1 = driver.findElement(By.xpath("//a[contains(text(),'Mark as Deleted')]"));
-        JavascriptExecutor executor = (JavascriptExecutor)driver;
-        executor.executeScript("arguments[0].click();", element1);
+        driver.findElement(By.xpath(String.format(deleteIcon,testCaseName))).click();
+        WebElement element1 = driver.findElement(By.xpath("//a[@id='deleteCases']"));
+        wait.until(ExpectedConditions.elementToBeClickable(element1)).click();
         return this;
     }
 }
