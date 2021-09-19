@@ -49,6 +49,11 @@ public class TestCasesPage extends BasePage {
         Actions builder = new Actions(driver);
         builder.moveToElement(element).perform();
         element.click();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         // ArrayList<WebElement> deletePermanently = new ArrayList(driver.findElements(By.xpath("//a[contains(text(),'Mark as Deleted')]")));
         WebElement element1 = driver.findElement(By.xpath("//a[contains(text(),'Mark as Deleted')]"));
         JavascriptExecutor executor = (JavascriptExecutor)driver;
